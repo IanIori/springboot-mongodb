@@ -1,26 +1,26 @@
 package com.ianiori.springbootmongo.resources;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ianiori.springbootmongo.domain.User;
+import com.ianiori.springbootmongo.services.UserService;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
+	
+	@Autowired
+	private UserService service;
 
 	@GetMapping
 	public ResponseEntity<List<User>> findAll() {
-		User Maria = new User(1L, "Maria Brow", "Maria@gmail.com");
-		User Alex = new User(2L, "Alex Green", "Alex@gmail.com");
-		List<User> list = new ArrayList<>();
-		list.addAll(Arrays.asList(Maria,Alex));
+		List<User> list = service.findAll();	
 		return ResponseEntity.ok().body(list);
 	}
 
