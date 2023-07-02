@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.ianiori.springbootmongo.domain.Post;
 import com.ianiori.springbootmongo.domain.User;
+import com.ianiori.springbootmongo.dto.AuthorDTO;
 import com.ianiori.springbootmongo.repositories.PostRepository;
 import com.ianiori.springbootmongo.repositories.UserRepository;
 
@@ -35,10 +36,11 @@ public class TestConfig implements CommandLineRunner{
 		User alex = new User(null, "Alex Green", "alex@gmail.com");
 		User bob = new User(null, "Bob Grey", "bob@gmail.com");
 		
-		Post post1 = new Post(null, sdf.parse("21/03/2023"), "Time to travel", "Going on a trip to LA", maria);
-		Post post2 = new Post(null, sdf.parse("23/03/2023"), "Good morning", "Woke up feeling good!", maria);
-		
 		userRepository.saveAll(Arrays.asList(maria, alex, bob));
+		
+		Post post1 = new Post(null, sdf.parse("21/03/2023"), "Time to travel", "Going on a trip to LA", new AuthorDTO(maria));
+		Post post2 = new Post(null, sdf.parse("23/03/2023"), "Good morning", "Woke up feeling good!", new AuthorDTO(maria));
+		
 		postRepository.saveAll(Arrays.asList(post1,post2));
 	}
 
